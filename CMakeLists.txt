@@ -401,7 +401,9 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "(arm|aarch64)")
 endif()
 
 if(COMPILER_SUPPORT_NEON AND OPUS_USE_NEON)
-
+  if(UNIX)
+    target_compile_options(opus "-march=armv7")
+  endif()
   if(OPUS_MAY_HAVE_NEON)
     if(RUNTIME_CPU_CAPABILITY_DETECTION)
       message(STATUS "OPUS_MAY_HAVE_NEON enabling runtime detection")
